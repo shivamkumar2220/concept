@@ -1,0 +1,25 @@
+class Solution {
+    static int matrixMultiplication(int arr[]) {
+        int n = arr.length;
+        return solve(1, n - 1, arr);
+    }
+
+    static int solve(int i, int j, int[] arr) {
+        if (i == j) {
+            return 0;
+        }
+
+        int answer = Integer.MAX_VALUE;
+
+        for (int k = i; k < j; k++) {
+            int left = solve(i, k, arr);
+            int right = solve(k + 1, j, arr);
+
+            int cost = arr[i - 1] * arr[k] * arr[j];
+
+            answer = Math.min(answer, left + right + cost);
+        }
+
+        return answer;
+    }
+}
